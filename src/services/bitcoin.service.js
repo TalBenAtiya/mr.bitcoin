@@ -7,7 +7,6 @@ export const bitcoinService = {
     getAvgBlockSize,
 }
 
-const STORAGE_KEY = 'rateDB'
 
 async function getRate() {
     let rate = loadFromStorage('rateDB')
@@ -23,8 +22,18 @@ async function getRate() {
     }
 }
 
-function getMarketPriceHistory() {
-
+async function getMarketPriceHistory() {
+    let priceHistory = loadFromStorage('priceHistoryDB')
+    if (priceHistory) {
+        console.log('History From Cache', priceHistory)
+        return priceHistory
+    } else {
+        const marketHistory = await axios.get('https://api.blockchain.info/charts/market-price?timespan=10months&format=json&cors=true')
+        priceHistory = marketHistory.data.values
+        console.log('History From Axios', priceHistory)
+        saveToStorage('priceHistoryDB', priceHistory)
+        return priceHistory.data.values
+    }
 }
 
 function getAvgBlockSize() {
