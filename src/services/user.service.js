@@ -8,6 +8,6 @@ const user = {
     transactions: [],
 }
 
-const getUser = () => {
+function getUser() {
     return user
 }
