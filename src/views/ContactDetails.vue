@@ -1,8 +1,10 @@
 <template>
   <section v-if="contact" class="contact-details main-layout">
-    <button class="btn-back">Back</button>
-    <img :src="`src/assets/img/${contact.img}.png`" />
-    <h3>{{contact.name}}</h3>
+    <button @click="goBack" class="btn-back">Back</button>
+    <img :src="`https://robohash.org/${contact.email}.png`" />
+    <h2>{{contact.name}}</h2>
+    <h3>{{contact.email}}</h3>
+    <h4>{{contact.phone}}</h4>
 
   </section>
 </template>
@@ -19,6 +21,11 @@ export default {
   async created() {
     const id = this.$route.params.contactId
     this.contact = await contactService.getContactById(id)
+  },
+  methods: {
+    goBack() {
+      this.$router.push('/contacts')
+    }
   }
 }
 </script>
@@ -34,20 +41,20 @@ export default {
   .btn-back{
     position: absolute;
     top: 0;
-    left: 0;
-    background-color: rgb(245, 60, 76);
+    left: 20px;
+    background-color: rgb(198, 34, 50);
     padding: 4px 10px;
     border-radius: 0.3em;
   }
 
-  h3 {
-    font-size: 25px;
+  h2 {
+    font-size: 30px;
   }
 
   img {
-    width: 100px;
+    width: 200px;
     object-fit: cover;
-    margin-block-end: 10px;
+    // margin-block-end: 10px;
   }
 }
 </style>

@@ -5,7 +5,9 @@ export default {
 </script>
 
 <template>
-    <h1>statistics</h1>
+    <section class="statistics main-layout">
+        <h1>statistics</h1>
+    </section>
 </template>
 
 <style>

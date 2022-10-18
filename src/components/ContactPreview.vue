@@ -11,22 +11,25 @@ export default {
         return {
 
         }
+    },
+    methods: {
+        onRemoveContact(contactId) {
+            console.log(contactId);
+            this.$emit('contact-removed', contactId)
+        }
     }
 
 }
 </script>
 
 <template>
-    <section class="contact-preview">
+    <RouterLink :to="`/contacts/${contact._id}`" class="contact-preview">
         <div class="info">    
-            <img :src="`src/assets/img/${contact.img}.png`" />
+            <img :src="`https://robohash.org/${contact.email}.png`" />
             <h4>{{contact.name}}</h4>
         </div>
-            <button>
-            <RouterLink :to="`/contacts/${contact._id}`">Details</RouterLink>
-        </button>
-    </section>
-
+            <button @click.prevent="onRemoveContact(contact._id)">Delete</button>
+    </RouterLink>
 </template>
 
 
@@ -34,10 +37,15 @@ export default {
 .contact-preview {
     display: flex;
     justify-content: space-between;
-    padding: 10px;
+    padding-inline: 10px;
     align-items: center;
     border-bottom: 1px solid rgb(232, 232, 232);
+    color: white;
+    transition: 0.2s;
 
+    &:hover {
+        background-color:  rgba(249, 249, 249, 0.044);
+    }
     .info {
         display: flex;
         gap: 20px;
@@ -46,18 +54,20 @@ export default {
 
     img {
         aspect-ratio: 1/1;
-        height: 50px;
+        width: 100px;
     }
 
     h4 {
-        font-weight: 500;
+        font-weight: 600;
     }
 
     button {
         background-color: transparent;
-
-        & a:hover {
-            color: orangered;
+        padding: 10px;
+        transition: 0.2s;
+        
+        &:hover {
+            color: rgb(198, 34, 50);
         }
     }
 }

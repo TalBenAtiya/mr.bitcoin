@@ -13,6 +13,16 @@ export default {
   },
   components: {
     ContactPreview
+  },
+  methods: {
+    removeContact(contactId) {
+
+      contactService.deleteContact(contactId)
+      
+      console.log('contactId:', contactId)
+      const idx = this.contacts.findIndex(contact => contact._id === contactId)
+      this.contacts.splice(idx, 1)
+    }
   }
 }
 </script>
@@ -21,14 +31,15 @@ export default {
   <section class="contacts main-layout">
     <h1>Contacts</h1>
     <div v-if="contacts" class="container">
-      <ContactPreview :key="contact._id" v-for="contact in contacts" :contact="contact" />
+      <ContactPreview @contact-removed="removeContact" :key="contact._id" v-for="contact in contacts"
+        :contact="contact" />
     </div>
   </section>
 </template>
 
 <style lang="scss">
 .contacts {
-  
+
   .container {
     width: 100%;
     display: flex;

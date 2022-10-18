@@ -1,9 +1,14 @@
 <script>
+import { userService } from '../services/user.service'
 export default {
     data() {
         return {
+            user: null
 
         }
+    },
+    created() {
+        this.user = userService.getUser()
     }
 }
 </script>
@@ -12,12 +17,13 @@ export default {
     <header>
         <div class="main-header main-layout">
             <div class="logo">
-                <h1>Mr.BitCoin</h1>
+                <h1 @click="this.$router.push('/')">Mr.BitCoin</h1>
             </div>
             <nav>
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/contacts">Contacts</RouterLink>
                 <RouterLink to="/statistics">Statistics</RouterLink>
+                <img :src="`https://robohash.org/${user.name}.png`" />
             </nav>
         </div>
     </header>
@@ -25,7 +31,7 @@ export default {
 
 <style lang="scss">
 header {
-    background-color: darkcyan;
+    background-color: rgb(255, 127, 41);
     margin-bottom: 50px;
 
     .main-header {
@@ -35,18 +41,31 @@ header {
         padding-block: 10px;
     }
 
+    .logo {
+        cursor: pointer;
+    }
+
     nav {
         display: flex;
         gap: 15px;
+        align-items: center;
 
         a {
+            padding: 5px;
+            border-radius: 0.3em;
+            transition: 0.2s;
+
             &:hover {
-                color: white;
+                background-color: rgba(22, 22, 22, 0.48);
             }
 
             &.router-link-active {
-                color: white;
+                background-color: rgba(22, 22, 22, 0.48);
             }
+        }
+
+        img {
+            width: 50px;
         }
     }
 }
