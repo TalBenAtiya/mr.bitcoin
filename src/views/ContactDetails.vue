@@ -1,34 +1,41 @@
-<template>
-  <section v-if="contact" class="contact-details main-layout">
-    <button @click="goBack" class="btn-back">Back</button>
-    <img :src="`https://robohash.org/${contact.email}.png`" />
-    <h2>{{contact.name}}</h2>
-    <h3>{{contact.email}}</h3>
-    <h4>{{contact.phone}}</h4>
-
-  </section>
-</template>
-
 <script>
-import { contactService } from '../services/contact.service';
-
 export default {
   data() {
     return {
-      contact: null,
+
     }
   },
-  async created() {
+  created() {
     const id = this.$route.params.contactId
-    this.contact = await contactService.getContactById(id)
+    this.$store.dispatch({ type: 'loadContact', id })
   },
   methods: {
     goBack() {
       this.$router.push('/contacts')
     }
+  },
+  computed: {
+    contact() {
+      return this.$store.getters.contact
+    }
+  },
+  unmounted() {
+    this.$store.commit({type: 'setContact' , contact: null})
   }
 }
 </script>
+
+<template>
+  <section v-if="contact" class="contact-details main-layout">
+    <button @click="goBack" class="btn-back">Back</button>
+    <img :src="`https://robohash.org/${contact._id}.png`" />
+    <h2>{{contact.name}}</h2>
+    <h3>{{contact.email}}</h3>
+    <h4>{{contact.phone}}</h4>
+  </section>
+</template>
+
+
 
 <style lang="scss">
 .contact-details {
@@ -38,14 +45,7 @@ export default {
   align-items: center;
   justify-content: center;
 
-  .btn-back{
-    position: absolute;
-    top: 0;
-    left: 20px;
-    background-color: rgb(198, 34, 50);
-    padding: 4px 10px;
-    border-radius: 0.3em;
-  }
+
 
   h2 {
     font-size: 30px;
@@ -54,7 +54,15 @@ export default {
   img {
     width: 200px;
     object-fit: cover;
-    // margin-block-end: 10px;
   }
+}
+
+.btn-back {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  background-color: orange;
+  padding: 4px 10px;
+  border-radius: 0.3em;
 }
 </style>

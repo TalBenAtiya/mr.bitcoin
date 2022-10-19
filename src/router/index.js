@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Contacts from '../views/Contacts.vue'
 import ContactDetails from '../views/ContactDetails.vue'
 import Statistics from '../views/Statistics.vue'
+import ContactEdit from '../views/ContactEdit.vue'
 
 
 const router = createRouter({
@@ -28,6 +29,12 @@ const router = createRouter({
       path: '/contacts/:contactId',
       name: 'details',
       component: ContactDetails
+     
+    },
+    {
+      path: '/contacts/edit/:contactId',
+      name: 'edit',
+      component: ContactEdit
      
     }
   ]

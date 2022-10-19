@@ -1,34 +1,33 @@
 <script>
-import { contactService } from '../services/contact.service'
 import ContactPreview from '../components/ContactPreview.vue'
 
 export default {
   data() {
     return {
-      contacts: null
+
     }
   },
-  async created() {
-    this.contacts = await contactService.getContacts();
+  created() {
+    this.$store.dispatch({ type: 'loadContacts' })
+  },
+  methods: {
+    removeContact(contactId) {
+      this.$store.dispatch({ type: 'removeContact', contactId })
+    }
+  },
+  computed: {
+    contacts() {
+      return this.$store.getters.contacts
+    }
   },
   components: {
     ContactPreview
   },
-  methods: {
-    removeContact(contactId) {
-
-      contactService.deleteContact(contactId)
-      
-      console.log('contactId:', contactId)
-      const idx = this.contacts.findIndex(contact => contact._id === contactId)
-      this.contacts.splice(idx, 1)
-    }
-  }
 }
 </script>
 
 <template>
-  <section class="contacts main-layout">
+  <section v-if="contacts" class="contacts main-layout">
     <h1>Contacts</h1>
     <div v-if="contacts" class="container">
       <ContactPreview @contact-removed="removeContact" :key="contact._id" v-for="contact in contacts"
@@ -39,6 +38,10 @@ export default {
 
 <style lang="scss">
 .contacts {
+  h1 {
+    color: white;
+    text-align: center;
+  }
 
   .container {
     width: 100%;

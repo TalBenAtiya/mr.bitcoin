@@ -1,3 +1,5 @@
+import { storageService } from "./async-storage.service";
+
 export const contactService = {
     getContacts,
     getContactById,
@@ -139,42 +141,27 @@ function sort(arr) {
     })
 }
 
-function getContacts(filterBy = null) {
-    return new Promise((resolve, reject) => {
-        var contactsToReturn = contacts;
-        if (filterBy && filterBy.term) {
-            contactsToReturn = filter(filterBy.term)
-        }
-        resolve(sort(contactsToReturn))
-    })
+async function getContacts(filterBy = null) {
+    let currContacts = await storageService.query('contactsDB')
+    if (!currContacts || currContacts.length <= 0) {
+        storageService.postMany('contactsDB', contacts)
+        currContacts = contacts
+    }
+    return currContacts
 }
 
-function getContactById(id) {
-    return new Promise((resolve, reject) => {
-        const contact = contacts.find(contact => contact._id === id)
-        contact ? resolve(contact) : reject(`Contact id ${id} not found!`)
-    })
+async function getContactById(id) {
+    const contact = await storageService.get('contactsDB', id)
+    return contact
 }
 
 function deleteContact(id) {
-    return new Promise((resolve, reject) => {
-        const index = contacts.findIndex(contact => contact._id === id)
-        if (index !== -1) {
-            contacts.splice(index, 1)
-        }
-
-        resolve(contacts)
-    })
+    return storageService.remove('contactsDB', id)
 }
 
-function _updateContact(contact) {
-    return new Promise((resolve, reject) => {
-        const index = contacts.findIndex(c => contact._id === c._id)
-        if (index !== -1) {
-            contacts[index] = contact
-        }
-        resolve(contact)
-    })
+async function _updateContact(contact) {
+   const updatedContact = await storageService.put('contactsDB', contact)
+   return updatedContact
 }
 
 function _addContact(contact) {
@@ -215,10 +202,4 @@ function _makeId(length = 10) {
         txt += possible.charAt(Math.floor(Math.random() * possible.length))
     }
     return txt
-}
-
-function getRandomInt(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
 }

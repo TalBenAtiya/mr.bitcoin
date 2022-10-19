@@ -23,8 +23,8 @@ export default {
       <h4>Your balance is: <span>{{user.balance}}</span></h4>
     </div>
     <div class="rate-info">
-      <h1>USD Rate:</h1>
-      <h2>${{rate}}</h2>
+      <h1>Bitcoin/USD Rate:</h1>
+      <h2>{{rate}}</h2>
     </div>
   </section>
 </template>

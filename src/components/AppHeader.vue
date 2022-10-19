@@ -9,6 +9,9 @@ export default {
     },
     created() {
         this.user = userService.getUser()
+    },
+    unmounted() {
+        this.$store.commit({type: 'setContact', contact: null})
     }
 }
 </script>
@@ -31,7 +34,7 @@ export default {
 
 <style lang="scss">
 header {
-    background-color: rgb(255, 127, 41);
+    background-color: rgb(73, 23, 96);
     margin-bottom: 50px;
 
     .main-header {
