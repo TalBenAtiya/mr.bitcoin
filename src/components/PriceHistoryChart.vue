@@ -91,7 +91,7 @@ export default {
         const priceHistory = await bitcoinService.getMarketPriceHistory()
         this.chartData.datasets[0].data = priceHistory.map((data) => data.y)
         this.chartData.labels = priceHistory.map((data) => {
-            return new Intl.DateTimeFormat('en-Us', { month: 'long' }).format((data.x + '000'))
+            return new Intl.DateTimeFormat(['ban', 'id']).format((data.x + '000'))
         })
     }
 }

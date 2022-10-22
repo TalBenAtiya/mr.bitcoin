@@ -3,15 +3,14 @@ import { userService } from '../services/user.service'
 export default {
     data() {
         return {
-            user: null
 
         }
     },
-    created() {
-        this.user = userService.getUser()
-    },
     unmounted() {
         this.$store.commit({type: 'setContact', contact: null})
+    },
+    computed: {
+        user() {return this.$store.getters.user}
     }
 }
 </script>
@@ -26,7 +25,8 @@ export default {
                 <RouterLink to="/">Home</RouterLink>
                 <RouterLink to="/contacts">Contacts</RouterLink>
                 <RouterLink to="/statistics">Statistics</RouterLink>
-                <img :src="`https://robohash.org/${user.name}.png`" />
+                <RouterLink to="/login">Login</RouterLink>
+                <img v-if="user" :src="`https://robohash.org/${user.name}.png?set=set4`" />
             </nav>
         </div>
     </header>

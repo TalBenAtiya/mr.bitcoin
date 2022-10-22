@@ -27,7 +27,7 @@ export default {
 <template>
     <RouterLink :to="`/contacts/${contact._id}`" class="contact-preview">
         <div class="info">
-            <img :src="`https://robohash.org/${contact._id}.png`" />
+            <img :src="`https://robohash.org/${contact._id}.png?set=set4`" />
             <h4>{{contact.name}}</h4>
         </div>
         <div class="options">
@@ -47,6 +47,7 @@ export default {
     border-bottom: 1px solid rgba(255, 255, 255, 0.119);
     color: white;
     transition: 0.2s;
+    padding-top: 15px;
 
     &:hover {
         background-color: rgba(249, 249, 249, 0.044);
@@ -60,7 +61,7 @@ export default {
 
     img {
         aspect-ratio: 1/1;
-        width: 100px;
+        width: 60px;
     }
 
     h4 {

@@ -26,7 +26,7 @@ export default {
 <template>
     <section v-if="contact" class="contact-edit main-layout">
         <button @click="goBack" class="btn-back">Back</button>
-        <img :src="`https://robohash.org/${contact._id}.png`" />
+        <img :src="`https://robohash.org/${contact._id}.png?set=set4`" />
         <h1>Edit contact</h1>
         <form>
             <label>Name:

@@ -4,6 +4,7 @@ import Contacts from '../views/Contacts.vue'
 import ContactDetails from '../views/ContactDetails.vue'
 import Statistics from '../views/Statistics.vue'
 import ContactEdit from '../views/ContactEdit.vue'
+import Login from '../views/Login.vue'
 
 
 const router = createRouter({
@@ -23,6 +24,12 @@ const router = createRouter({
       path: '/statistics',
       name: 'statistics',
       component: Statistics
+    
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: Login
     
     },
     {

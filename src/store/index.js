@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
 import { contactService } from '../services/contact.service'
+import user from './modules/user'
 
 const storeOptions = {
     strict: true,
@@ -20,7 +21,7 @@ const storeOptions = {
         setContact(state, { contact }) {
             state.contact = contact
         },
-        saveContact(state, {contact}) {
+        saveContact(state, { contact }) {
             const idx = state.contacts.findIndex(currContact => currContact._id === contact._id)
             state.contacts.splice(idx, 1, contact)
         }
@@ -38,9 +39,9 @@ const storeOptions = {
             await contactService.deleteContact(contactId)
             commit({ type: 'remove', contactId })
         },
-        async saveContact({commit}, {contact}) {
+        async saveContact({ commit }, { contact }) {
             await contactService.saveContact(contact)
-            commit({type:'saveContact', contact})
+            commit({ type: 'saveContact', contact })
         }
     },
     getters: {
@@ -52,7 +53,7 @@ const storeOptions = {
         }
     },
     modules: {
-
+        user,
     }
 }
 
