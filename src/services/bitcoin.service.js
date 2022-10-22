@@ -11,7 +11,6 @@ export const bitcoinService = {
 
 async function getRate() {
     let rate = _loadFromStorage('rateDB')
-    console.log('rate:', rate)
     if (rate && (1000 * 60 * 5 > Date.now() - rate.updatedAt)) {
         console.log('From Cache', rate);
         return rate.value

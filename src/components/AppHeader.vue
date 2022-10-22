@@ -26,7 +26,7 @@ export default {
                 <RouterLink to="/contacts">Contacts</RouterLink>
                 <RouterLink to="/statistics">Statistics</RouterLink>
                 <RouterLink to="/login">Login</RouterLink>
-                <img v-if="user" :src="`https://robohash.org/${user.name}.png?set=set4`" />
+                <img v-if="user" :src="`https://robohash.org/${user.name}.png`" />
             </nav>
         </div>
     </header>

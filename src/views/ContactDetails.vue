@@ -29,7 +29,7 @@ export default {
   <section v-if="contact" class="contact-details main-layout">
     <button @click="goBack" class="btn-back">Back</button>
     <div class="info">
-      <img :src="`https://robohash.org/${contact._id}.png?set=set4`" />
+      <img :src="`https://robohash.org/${contact._id}.png`" />
       <h2>{{contact.name}}</h2>
       <h3>{{contact.email}}</h3>
       <h4>{{contact.phone}}</h4>

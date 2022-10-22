@@ -16,7 +16,6 @@ export default {
     },
     methods: {
         onRemoveContact(contactId) {
-            console.log(contactId);
             this.$emit('contact-removed', contactId)
         }
     }
@@ -27,7 +26,7 @@ export default {
 <template>
     <RouterLink :to="`/contacts/${contact._id}`" class="contact-preview">
         <div class="info">
-            <img :src="`https://robohash.org/${contact._id}.png?set=set4`" />
+            <img :src="`https://robohash.org/${contact._id}.png`" />
             <h4>{{contact.name}}</h4>
         </div>
         <div class="options">
@@ -61,7 +60,7 @@ export default {
 
     img {
         aspect-ratio: 1/1;
-        width: 60px;
+        width: 80px;
     }
 
     h4 {
