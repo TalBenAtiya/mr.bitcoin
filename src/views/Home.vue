@@ -82,7 +82,6 @@ export default {
   .rate-info {
     display: flex;
     gap: 10px;
-    margin-bottom: 30px;
     justify-content: center;
     border: 1px solid orange;
     padding: 20px;
@@ -92,29 +91,5 @@ export default {
       color: greenyellow;
     }
   }
-
-  .user-transactions {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.174);
-    padding: 20px;
-    border-radius: 1em;
-
-
-    .container {
-      display: flex;
-      justify-content: space-around;
-      text-align: center;
-
-    }
-
-    .title {
-      color: greenyellow;
-      align-self: center;
-      margin-block-end: 20px;
-    }
-  }
-
 }
 </style>

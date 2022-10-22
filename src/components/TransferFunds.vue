@@ -30,8 +30,9 @@ export default {
             this.$store.dispatch({ type: 'setTransaction', transaction: this.transaction })
             this.sucssMsg = true
             setTimeout(() => {
-                    this.sucssMsg = false
-                }, 8000)
+                this.sucssMsg = false
+            }, 8000)
+            this.transaction.amount = null
         }
     },
     computed: {
@@ -44,10 +45,12 @@ export default {
 <template>
     <section v-if="user" class="transfer-funds">
         <h3>Transfer Funds</h3>
-        <label>Amount:
-            <input type="number" v-model="transaction.amount" />
-        </label>
-        <button @click="onTransferFund">Send</button>
+        <div class="transfer-box">
+            <label>Amount:
+                <input type="number" v-model="transaction.amount" />
+            </label>
+            <button @click="onTransferFund">Send</button>
+        </div>
         <h5 class="err" v-if="errMsg">Unable to transfer: Amount is higher than balance or lower than 0</h5>
         <h5 class="success" v-if="sucssMsg">Amount Transferd Successfully</h5>
     </section>
@@ -59,6 +62,8 @@ export default {
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    gap: 10px;
+    margin-block-start: 30px;
 
     .success {
         color: greenyellow;
@@ -70,6 +75,26 @@ export default {
 
     h3 {
         color: orange;
+    }
+
+    .transfer-box {
+        display: flex;
+        gap: 10px;
+        color: orange;
+
+        input {
+            padding: 5px;
+        }
+
+        button {
+            color: black;
+            padding: 6px;
+            border-radius: 0.3em;
+
+            &:hover {
+                background-color: greenyellow;
+            }
+        }
     }
 }
 </style>
