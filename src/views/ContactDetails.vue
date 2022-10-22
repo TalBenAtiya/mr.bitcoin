@@ -17,8 +17,11 @@ export default {
   },
   computed: {
     contact() {
-      return this.$store.getters.contact;
+      return this.$store.getters.contact
     },
+    user() {
+      return this.$store.getters.user
+    }
   },
   methods: {
     goBack() {
@@ -48,7 +51,7 @@ export default {
       <h2 class="title">Last Transactions</h2>
       <div class="container">
         <TransactionList v-for="transaction in transactions.slice(0,3)" :transaction="transaction"
-          :key="transaction.at" />
+         :user="user" :key="transaction.at" />
       </div>
     </div>
   </section>

@@ -1,7 +1,13 @@
 <script>
+
 export default {
     props: {
         transaction:
+        {
+            type: Object,
+            require: true
+        },
+        user:
         {
             type: Object,
             require: true
@@ -17,9 +23,14 @@ export default {
 
 
 <template>
-    <section class="transaction-list">
+    <section v-if="user" class="transaction-list">
+        <h2>{{user.name}}</h2>
+        <h3 class="plus">+ {{transaction.amount}}₿</h3>
+        <h4>{{new Intl.DateTimeFormat(['ban', 'id']).format((transaction.at))}}</h4>
+    </section>
+    <section v-else class="transaction-list">
         <h2>{{transaction.to}}</h2>
-        <h3>- {{transaction.amount}}₿</h3>
+        <h3 class="minus">- {{transaction.amount}}₿</h3>
         <h4>{{new Intl.DateTimeFormat(['ban', 'id']).format((transaction.at))}}</h4>
     </section>
 </template>
@@ -32,12 +43,17 @@ export default {
 
     h2 {
         color: orange;
+        text-transform: capitalize;
     }
 
-    h3 {
+    .minus {
         color: crimson;
     }
-    
+
+    .plus {
+        color: greenyellow
+    }
+
 }
 
 .user-transactions {
@@ -49,20 +65,20 @@ export default {
     border-radius: 1em;
     margin-block-start: 50px;
     width: 100%;
-    
+
 
 
     .container {
-      display: flex;
-      justify-content: space-around;
-      text-align: center;
-      justify-content: space-around;
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        justify-content: space-around;
     }
 
     .title {
-      color: greenyellow;
-      align-self: center;
-      margin-block-end: 20px;
+        color: greenyellow;
+        align-self: center;
+        margin-block-end: 20px;
     }
-  }
+}
 </style>
