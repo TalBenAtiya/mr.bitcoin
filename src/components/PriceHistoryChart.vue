@@ -71,16 +71,16 @@ export default {
                 datasets: [
                     {
                         label: 'Bitcoin USD Rate',
-                        // pointBackgroundColor: "orange",
-                        // pointBorderColor: "orange",
-                        backgroundColor: "yellow",
-                        borderColor: "orange",
+                        pointBackgroundColor: "orange",
+                        pointBorderColor: "orange",
+                        backgroundColor: "orange",
+                        borderColor: "darkgray",
                         data: [],
                         borderWidth: 1,
                         tension: 0.5,
                         fill: true,
-                        // pointHoverBackgroundColor: "greenyellow",
-                        // pointHoverBorderColor: "greenyellow",
+                        pointHoverBackgroundColor: "greenyellow",
+                        pointHoverBorderColor: "greenyellow",
                     },
 
                 ],
