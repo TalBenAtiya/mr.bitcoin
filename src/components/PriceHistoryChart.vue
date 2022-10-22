@@ -71,19 +71,28 @@ export default {
                 datasets: [
                     {
                         label: 'Bitcoin USD Rate',
-                        backgroundColor: 'orange',
-                        fill: {
-                            target: origin,
-                            above: 'rgb(255, 0, 0)',
-                            below: 'rgb(0, 0, 255)'
-                        },
+                        // pointBackgroundColor: "orange",
+                        // pointBorderColor: "orange",
+                        backgroundColor: "yellow",
+                        borderColor: "orange",
                         data: [],
+                        borderWidth: 1,
+                        tension: 0.5,
+                        fill: true,
+                        // pointHoverBackgroundColor: "greenyellow",
+                        // pointHoverBorderColor: "greenyellow",
                     },
-                ]
+
+                ],
             },
             chartOptions: {
                 responsive: true,
-                maintainAspectRatio: false
+                maintainAspectRatio: false,
+                plugins: {
+                    filler: {
+                        propagate: true
+                    }
+                }
             }
         }
     },
